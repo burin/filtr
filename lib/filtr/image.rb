@@ -33,9 +33,10 @@ module Filtr
         `cp #{image.file_path} #{image.path}`
         `convert -size 800x600\\> -contrast -modulate 100,150 -gaussian 1x2 +matte #{image.path} #{image.mask}`
         `convert -gaussian 0x5 -modulate 180,150 #{image.mask} #{image.mask}`
-        `convert -resize 800x600\\> -unsharp 1.5x1.5 -modulate 175,100 -contrast -contrast -contrast #{image.path} #{image.path}`
+        `convert -resize 800x600\\> -unsharp 1.5x1.5 -modulate 150,100 -contrast -contrast -contrast #{image.path} #{image.path}`
         `convert -gaussian 1x2 #{image.path} #{image.path}`
         `composite -compose multiply #{image.mask} #{image.path} #{image.path}`
+        `convert -modulate 125,70 #{image.path} #{image.path}`
         return image
       end
 
@@ -72,11 +73,9 @@ module Filtr
       def blues(file_path)
         image = self.new(file_path)
         `cp #{image.file_path} #{image.path}`
-        `convert  -resize 800x600\\> -unsharp 1.5x1.5 -modulate 125,50 -contrast -contrast -contrast #{image.path} #{image.path}`
+        `convert -resize 800x600\\> -modulate 150,50 -contrast -contrast #{image.path} #{image.path}`
         `convert #{image.path} -fill blue -colorize 10% #{image.path}`
         return image
-        
-        
       end
 
     end
