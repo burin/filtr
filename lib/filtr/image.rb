@@ -69,6 +69,16 @@ module Filtr
         return image
       end
 
+      def blues(file_path)
+        image = self.new(file_path)
+        `cp #{image.file_path} #{image.path}`
+        `convert  -resize 800x600\\> -unsharp 1.5x1.5 -modulate 125,50 -contrast -contrast -contrast #{image.path} #{image.path}`
+        `convert #{image.path} -fill blue -colorize 10% #{image.path}`
+        return image
+        
+        
+      end
+
     end
   end
 end
